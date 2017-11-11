@@ -1,0 +1,32 @@
+package gettingstart.theater
+
+import gettingstart.common.NonEmptyString
+import gettingstart.common.ListIsNonEmpty
+import gettingstart.common.PositiveNumber
+
+type Theater {
+  name: NonEmptyString
+  address: NonEmptyString
+  availablePlans: List[Plan] verifying ListIsNonEmpty("Please provide a plan")
+}
+
+type Plan {
+  name: NonEmptyString
+  seats: List[Seat] verifying ListIsNonEmpty("The plan cannot be empty")
+}
+
+type Seat {
+  code: SeatName
+  x: PositiveNumber
+  y: PositiveNumber
+  width: PositiveNumber
+  height: PositiveNumber
+}
+
+type SeatName = String verifying IsSeatName
+verification IsSeatName {
+  "The seat name is invalid"
+  (seatName: String) => {
+    1 <= seatName.length && seatName.length <= 3
+  }
+}

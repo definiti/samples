@@ -1,0 +1,24 @@
+package gettingstart.common
+
+type NonEmptyString = String verifying StringIsNonEmpty
+verification StringIsNonEmpty {
+  "The string should not be empty"
+  (string: String) => {
+    string.nonEmpty()
+  }
+}
+
+verification ListIsNonEmpty {
+  "The list should not be empty"
+  [A](list: List[A]) => {
+    list.nonEmpty()
+  }
+}
+
+type PositiveNumber = Number verifying IsPositive
+verification IsPositive {
+  "The number should be positive"
+  (number: Number) => {
+    number > 0
+  }
+}
