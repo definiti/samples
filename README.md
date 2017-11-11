@@ -5,7 +5,7 @@ This project show how to get started with Definiti project.
 ## How to launch the project?
 
 ```bash
-$ git clone -b getting-start https://github.com/definiti/samples.git
+$ git clone -b getting-start https://github.com/definiti/samples.git getting-start
 $ cd getting-start
 $ nut run
 ```
