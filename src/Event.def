@@ -1,0 +1,36 @@
+package my.event
+
+type Event {
+  name: String verifying NonEmptyString("Please provide an event name")
+  content: Content
+  date: Date
+  registrationPeriod: Period
+
+  verify {
+    "The registration period should be before the date of the event"
+    (event) => {
+      event.registrationPeriod.end.isBeforeOrEqual(event.date)
+    }
+  }
+}
+
+type Content = String verifying NonEmptyString
+
+verification NonEmptyString {
+  "Please provide a non empty string"
+  (string: String) => {
+    string.nonEmpty()
+  }
+}
+
+type Period {
+  start: Date
+  end: Date
+
+  verify {
+    "start and end are reversed"
+    (period) => {
+      period.start.isBeforeOrEqual(period.end)
+    }
+  }
+}
