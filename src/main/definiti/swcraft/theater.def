@@ -1,0 +1,37 @@
+package swcraft
+
+import swcraft.NonEmptyList
+import swcraft.IsNonEmptyList
+import swcraft.IsRequiredString
+import swcraft.RequiredString
+import swcraft.PositiveNumber
+
+type Theater {
+  name: String verifying IsRequiredString("Please provide a valid name")
+  address: String verifying IsRequiredString("Please provide a valid address")
+  plans: List[Plan] verifying IsNonEmptyList("Please give at least one plan")
+}
+
+type Plan {
+  stage: Position
+  seats: List[Seat] verifying IsNonEmptyList
+
+  verify {
+    "Two seats cannot have the same code"
+    (plan) => {
+      plan.seats.forAll((seat: Seat) => {
+        plan.seats.count((innerSeat: Seat) => {innerSeat.name == seat.name}) == 1
+      })
+    }
+  }
+}
+
+type Seat {
+  name: RequiredString
+  position: Position
+}
+
+type Position {
+  x: PositiveNumber
+  y: PositiveNumber
+}

@@ -1,0 +1,25 @@
+package swcraft
+
+type RequiredString = String verifying IsRequiredString
+verification IsRequiredString {
+  "The string should not be empty"
+  (string: String) => {
+    string.nonEmpty()
+  }
+}
+
+type NonEmptyList[A] = List[A] verifying IsNonEmptyList
+verification IsNonEmptyList {
+  "The list should not be empty"
+  [A](list: List[A]) => {
+    list.nonEmpty()
+  }
+}
+
+type PositiveNumber = Number verifying IsPositive
+verification IsPositive {
+  "The number should be positive"
+  (number: Number) => {
+    number > 0
+  }
+}
